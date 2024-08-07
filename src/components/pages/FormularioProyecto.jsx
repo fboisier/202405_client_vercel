@@ -1,4 +1,3 @@
-import axios from "axios";
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
@@ -6,6 +5,7 @@ import * as Yup from "yup";
 import { extractErrors } from '../../utils/funciones.js';
 import Loading from "../utils/Loading";
 import styles from "./FormularioProyecto.module.css";
+import { customAxios } from "../../handlers/api.js";
 
 const ProyectoValidacionSchema = Yup.object().shape({
     nombre: Yup.string()
@@ -30,7 +30,7 @@ const FormularioProyecto = () => {
 
         const crearProyecto = async () => {
             try {
-                const { data } = await axios.post('/api/v1/proyectos', values);
+                const { data } = await customAxios('post', '/api/v1/proyectos', values);
 
                 Swal.fire({
                     title: "GENIAL!",

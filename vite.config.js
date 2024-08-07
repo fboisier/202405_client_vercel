@@ -7,12 +7,5 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
-    proxy: {
-      '/api': {
-        target: 'https://two02405-server-render.onrender.com',
-        changeOrigin: true,
-        secure: false,
-      },
-    },
   },
 })

@@ -1,7 +1,7 @@
-import axios from "axios";
 import Swal from 'sweetalert2';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/useContextAuth";
+import { customAxios } from "../../handlers/api";
 
 
 
@@ -14,7 +14,7 @@ const Logout = () => {
     const handleLogOut = () => {
         const logOutUser = async () => {
             try {
-                const { data } = await axios.get('/api/v1/auth/logout');
+                const { data } = await customAxios('get','/api/v1/auth/logout');
                 console.log(data);
                 setUsuario(null)
                 localStorage.removeItem('usuario');

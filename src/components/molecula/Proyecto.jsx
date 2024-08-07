@@ -1,8 +1,8 @@
 import styles from "./Proyecto.module.css"
-import axios from "axios"
 import Swal from 'sweetalert2'
 import moment from 'moment';
 import 'moment/locale/es';
+import { customAxios } from "../../handlers/api";
 
 moment.locale('es');
 
@@ -13,7 +13,7 @@ const Proyecto = ({id, titulo, fecha, tipo, proyectos, setProyectos}) => {
         const actualizarProyecto = async () => {
             try {
                 const tipoDestino = tipo === "BACK" ? tipo = "PROG" : tipo = "COMP";
-                const { data } = await axios.put(`/api/v1/proyectos/${id}`, {estado: tipoDestino});
+                const { data } = await customAxios('put', `/api/v1/proyectos/${id}`, {estado: tipoDestino});
                 
                 setProyectos([ ...proyectos.filter(proyecto => proyecto._id !== id), data ])
             }
@@ -27,7 +27,7 @@ const Proyecto = ({id, titulo, fecha, tipo, proyectos, setProyectos}) => {
 
     const eliminarProyecto = async (id) => {
         try {
-            await axios.delete(`/api/v1/proyectos/${id}`);
+            await customAxios('delete', `/api/v1/proyectos/${id}`);
             setProyectos(proyectos.filter(proyecto => proyecto._id !== id));
         } catch (error) {
             Swal.fire({

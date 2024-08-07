@@ -1,4 +1,3 @@
-import axios from "axios";
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
@@ -6,6 +5,7 @@ import * as Yup from "yup";
 import Loading from "../utils/Loading";
 import styles from "./Login.module.css";
 import { useAuth } from "../utils/useContextAuth";
+import { customAxios } from "../../handlers/api";
 
 const LoginValidacionSchema = Yup.object().shape({
     email: Yup.string()
@@ -29,7 +29,7 @@ const Login = () => {
 
         const loginUser = async () => {
             try {
-                const { data } = await axios.post('/api/v1/auth/login', values);
+                const { data } = await customAxios('post', '/api/v1/auth/login', values);
                 console.log(data);
                 setUsuario(data.usuario)
                 localStorage.setItem('usuario', JSON.stringify(data.usuario));

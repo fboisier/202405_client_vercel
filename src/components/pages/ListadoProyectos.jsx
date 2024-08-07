@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import GrupoProyectos from "../molecula/GrupoProyectos";
+import { customAxios } from "../../handlers/api";
 
 const ListadoProyectos = () => {
 
@@ -9,7 +9,7 @@ const ListadoProyectos = () => {
 
     useEffect(() => {
         const obtenerProyectos = async () => {
-            const { data } = await axios.get('/api/v1/proyectos');
+            const { data } = await customAxios('get', '/api/v1/proyectos');
             setProyectos(data);
         }
         obtenerProyectos();
