@@ -1,0 +1,12 @@
+.contenedor{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 30px;
+    border-radius: 0px;
+    border: 1px solid black;
+    padding: 30px;
+    max-height: 80vh;
+    overflow: auto;
+}
