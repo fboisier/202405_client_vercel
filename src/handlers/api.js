@@ -13,28 +13,19 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
  */
 export const customAxios = async (method, endpoint, data = null) => {
     try {
-        let response;
+        let optionAxios = {
+            method,
+            url: `${BASE_URL}${endpoint}`,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true, // Para manejar cookies
+        };
         if (data){
-            response = await axios({
-                method,
-                url: `${BASE_URL}${endpoint}`,
-                data,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                withCredentials: true, // Para manejar cookies
-            });
-        }else{
-            response = await axios({
-                method,
-                url: `${BASE_URL}${endpoint}`,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                withCredentials: true, // Para manejar cookies
-            });
+            optionAxios = {...optionAxios, data}
         }
 
+        const response = await axios(optionAxios);        
         return response;
     } catch (error) {
         console.error('API Error:', error);
